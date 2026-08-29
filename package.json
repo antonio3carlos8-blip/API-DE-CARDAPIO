@@ -1,0 +1,33 @@
+{
+  "name": "api-de-card-pio",
+  "version": "1.0.0",
+  "description": "🍔 Cardápio Digital",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "prisma skills sync || exit 0",
+    "dev": "nodemon src/server.js",
+    "start": "node src/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/antonio3carlos8-blip/API-de-Card-pio.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/antonio3carlos8-blip/API-de-Card-pio/issues"
+  },
+  "homepage": "https://github.com/antonio3carlos8-blip/API-de-Card-pio#readme",
+  "dependencies": {
+    "@prisma/client": "^7.10.0",
+    "express": "^5.2.1",
+    "zod": "^4.5.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14",
+    "prisma": "^8.0.0-rc.12"
+  }
+}

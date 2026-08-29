@@ -1,0 +1,38 @@
+```gitignore
+# Dependências
+node_modules/
+
+# Variáveis de ambiente
+.env
+.env.*
+
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# Prisma
+
+
+# Arquivos do sistema
+.DS_Store
+Thumbs.db
+
+# IDE / Editores
+.vscode/
+.idea/
+
+# Builds / cobertura
+dist/
+build/
+coverage/
+
+# Cache
+.npm/
+.cache/
+.tmp/
+temp/
+```
