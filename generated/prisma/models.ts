@@ -8,6 +8,7 @@
  *
  * 🟢 You can import this file directly.
  */
+export type * from './models/Cardapio.ts'
 export type * from './models/Categoria.ts'
 export type * from './models/Produto.ts'
 export type * from './commonInputTypes.ts'

@@ -51,6 +51,7 @@ export const AnyNull = runtime.AnyNull
 
 
 export const ModelName = {
+  Cardapio: 'Cardapio',
   Categoria: 'Categoria',
   Produto: 'Produto'
 } as const
@@ -71,9 +72,22 @@ export const TransactionIsolationLevel = runtime.makeStrictEnum({
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
 
+export const CardapioScalarFieldEnum = {
+  id: 'id',
+  nome: 'nome',
+  descricao: 'descricao',
+  ativo: 'ativo',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CardapioScalarFieldEnum = (typeof CardapioScalarFieldEnum)[keyof typeof CardapioScalarFieldEnum]
+
+
 export const CategoriaScalarFieldEnum = {
   id: 'id',
   nome: 'nome',
+  cardapioId: 'cardapioId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -86,6 +100,7 @@ export const ProdutoScalarFieldEnum = {
   nome: 'nome',
   descricao: 'descricao',
   preco: 'preco',
+  imagemUrl: 'imagemUrl',
   disponivel: 'disponivel',
   categoriaId: 'categoriaId',
   createdAt: 'createdAt',

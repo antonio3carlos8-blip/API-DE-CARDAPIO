@@ -397,6 +397,7 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 
 
 export const ModelName = {
+  Cardapio: 'Cardapio',
   Categoria: 'Categoria',
   Produto: 'Produto'
 } as const
@@ -414,10 +415,84 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "categoria" | "produto"
+    modelProps: "cardapio" | "categoria" | "produto"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
+    Cardapio: {
+      payload: Prisma.$CardapioPayload<ExtArgs>
+      fields: Prisma.CardapioFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CardapioFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CardapioPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CardapioFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CardapioPayload>
+        }
+        findFirst: {
+          args: Prisma.CardapioFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CardapioPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CardapioFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CardapioPayload>
+        }
+        findMany: {
+          args: Prisma.CardapioFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CardapioPayload>[]
+        }
+        create: {
+          args: Prisma.CardapioCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CardapioPayload>
+        }
+        createMany: {
+          args: Prisma.CardapioCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.CardapioCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CardapioPayload>[]
+        }
+        delete: {
+          args: Prisma.CardapioDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CardapioPayload>
+        }
+        update: {
+          args: Prisma.CardapioUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CardapioPayload>
+        }
+        deleteMany: {
+          args: Prisma.CardapioDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CardapioUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.CardapioUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CardapioPayload>[]
+        }
+        upsert: {
+          args: Prisma.CardapioUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CardapioPayload>
+        }
+        aggregate: {
+          args: Prisma.CardapioAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCardapio>
+        }
+        groupBy: {
+          args: Prisma.CardapioGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CardapioGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CardapioCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CardapioCountAggregateOutputType> | number
+        }
+      }
+    }
     Categoria: {
       payload: Prisma.$CategoriaPayload<ExtArgs>
       fields: Prisma.CategoriaFieldRefs
@@ -605,9 +680,22 @@ export const TransactionIsolationLevel = runtime.makeStrictEnum({
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
 
+export const CardapioScalarFieldEnum = {
+  id: 'id',
+  nome: 'nome',
+  descricao: 'descricao',
+  ativo: 'ativo',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CardapioScalarFieldEnum = (typeof CardapioScalarFieldEnum)[keyof typeof CardapioScalarFieldEnum]
+
+
 export const CategoriaScalarFieldEnum = {
   id: 'id',
   nome: 'nome',
+  cardapioId: 'cardapioId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -620,6 +708,7 @@ export const ProdutoScalarFieldEnum = {
   nome: 'nome',
   descricao: 'descricao',
   preco: 'preco',
+  imagemUrl: 'imagemUrl',
   disponivel: 'disponivel',
   categoriaId: 'categoriaId',
   createdAt: 'createdAt',
@@ -674,6 +763,13 @@ export type ListStringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaMod
 
 
 /**
+ * Reference to a field of type 'Boolean'
+ */
+export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+/**
  * Reference to a field of type 'DateTime'
  */
 export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
@@ -698,13 +794,6 @@ export type DecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel,
  * Reference to a field of type 'Decimal[]'
  */
 export type ListDecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal[]'>
-    
-
-
-/**
- * Reference to a field of type 'Boolean'
- */
-export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 
@@ -872,6 +961,7 @@ export interface PrismaClientOptionsWithAdapter extends PrismaClientBaseOptions 
  */
 export type PrismaClientOptions = PrismaClientOptionsWithAccelerateUrl | PrismaClientOptionsWithAdapter
 export type GlobalOmitConfig = {
+  cardapio?: Prisma.CardapioOmit
   categoria?: Prisma.CategoriaOmit
   produto?: Prisma.ProdutoOmit
 }
