@@ -1,4 +1,4 @@
-import BaseRepository from "./baseRepository.js";
+import BaseRepository from "./base/baseRepository.js";
 import prisma from "../config/prisma.js";
 
 class CardapioRepositorio extends BaseRepository {

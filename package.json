@@ -1,5 +1,5 @@
 {
-  "name": "api-de-card-pio",
+  "name": "api-de-cardapio",
   "version": "1.0.0",
   "description": "🍔 Cardápio Digital",
   "main": "index.js",
@@ -8,22 +8,24 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "postinstall": "prisma skills sync || exit 0",
     "dev": "nodemon src/server.js",
-    "start": "node src/server.js"
+    "start": "node src/server.js",
+    "seed": "node src/seeds/seed.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/antonio3carlos8-blip/API-de-Card-pio.git"
+    "url": "git+https://github.com/antonio3carlos8-blip/API-DE-CARDAPIO.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/antonio3carlos8-blip/API-de-Card-pio/issues"
+    "url": "https://github.com/antonio3carlos8-blip/API-DE-CARDAPIO/issues"
   },
-  "homepage": "https://github.com/antonio3carlos8-blip/API-de-Card-pio#readme",
+  "homepage": "https://github.com/antonio3carlos8-blip/API-DE-CARDAPIO#readme",
   "dependencies": {
     "@prisma/adapter-pg": "^7.10.0",
     "@prisma/client": "^7.10.0",
+    "cors": "^2.8.6",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "pg": "^8.23.0",
