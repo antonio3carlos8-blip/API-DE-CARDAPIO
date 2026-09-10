@@ -1,0 +1,104 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Cardapio {
+  id        String  @id @default(uuid())
+  nome      String
+  descricao String?
+  imagemUrl String? @map("imagem_url")
+  ativo     Boolean @default(true)
+
+  categorias Categoria[]
+  pedidos    Pedido[]
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("cardapios")
+}
+
+model Categoria {
+  id   String @id @default(uuid())
+  nome String
+
+  cardapioId String   @map("cardapio_id")
+  cardapio   Cardapio @relation(fields: [cardapioId], references: [id])
+
+  produtos Produto[]
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@index([cardapioId])
+  @@map("categorias")
+}
+
+model Produto {
+  id         String  @id @default(uuid())
+  nome       String
+  descricao  String?
+  preco      Decimal @db.Decimal(10, 2)
+  imagemUrl  String? @map("imagem_url")
+  disponivel Boolean @default(true)
+
+  categoriaId String       @map("categoria_id")
+  categoria   Categoria    @relation(fields: [categoriaId], references: [id])
+  pedidoItens PedidoItem[]
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@index([categoriaId])
+  @@map("produtos")
+}
+
+enum PedidoStatus {
+  RECEBIDO
+  EM_PREPARO
+  PRONTO
+  CANCELADO
+}
+
+model Pedido {
+  id                String       @id @default(uuid())
+  chaveIdempotencia String       @unique @map("chave_idempotencia")
+  clienteNome       String       @map("cliente_nome")
+  observacao        String?
+  status            PedidoStatus @default(RECEBIDO)
+  total             Decimal      @db.Decimal(10, 2)
+
+  cardapioId String       @map("cardapio_id")
+  cardapio   Cardapio     @relation(fields: [cardapioId], references: [id])
+  itens      PedidoItem[]
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@index([cardapioId])
+  @@index([status, createdAt])
+  @@map("pedidos")
+}
+
+model PedidoItem {
+  id            String  @id @default(uuid())
+  nomeProduto   String  @map("nome_produto")
+  precoUnitario Decimal @map("preco_unitario") @db.Decimal(10, 2)
+  quantidade    Int
+  subtotal      Decimal @db.Decimal(10, 2)
+
+  pedidoId  String   @map("pedido_id")
+  pedido    Pedido   @relation(fields: [pedidoId], references: [id], onDelete: Cascade)
+  produtoId String?  @map("produto_id")
+  produto   Produto? @relation(fields: [produtoId], references: [id], onDelete: SetNull)
+
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@index([pedidoId])
+  @@index([produtoId])
+  @@map("pedido_itens")
+}
