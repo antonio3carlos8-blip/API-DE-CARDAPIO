@@ -14,7 +14,7 @@ if (!new Set(["postgres", "memory"]).has(dataStore)) {
 }
 
 const criarPrismaPostgres = async () => {
-  const { PrismaClient } = await import("../../generated/prisma/client.ts");
+  const { PrismaClient } = await import("@prisma/client");
   const adapter = new PrismaPg({
     connectionString: obterDatabaseUrl(),
     connectionTimeoutMillis: 5_000,
