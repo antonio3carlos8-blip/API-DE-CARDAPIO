@@ -53,7 +53,9 @@ export const AnyNull = runtime.AnyNull
 export const ModelName = {
   Cardapio: 'Cardapio',
   Categoria: 'Categoria',
-  Produto: 'Produto'
+  Produto: 'Produto',
+  Pedido: 'Pedido',
+  PedidoItem: 'PedidoItem'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -76,6 +78,7 @@ export const CardapioScalarFieldEnum = {
   id: 'id',
   nome: 'nome',
   descricao: 'descricao',
+  imagemUrl: 'imagemUrl',
   ativo: 'ativo',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -108,6 +111,35 @@ export const ProdutoScalarFieldEnum = {
 } as const
 
 export type ProdutoScalarFieldEnum = (typeof ProdutoScalarFieldEnum)[keyof typeof ProdutoScalarFieldEnum]
+
+
+export const PedidoScalarFieldEnum = {
+  id: 'id',
+  chaveIdempotencia: 'chaveIdempotencia',
+  clienteNome: 'clienteNome',
+  observacao: 'observacao',
+  status: 'status',
+  total: 'total',
+  cardapioId: 'cardapioId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PedidoScalarFieldEnum = (typeof PedidoScalarFieldEnum)[keyof typeof PedidoScalarFieldEnum]
+
+
+export const PedidoItemScalarFieldEnum = {
+  id: 'id',
+  nomeProduto: 'nomeProduto',
+  precoUnitario: 'precoUnitario',
+  quantidade: 'quantidade',
+  subtotal: 'subtotal',
+  pedidoId: 'pedidoId',
+  produtoId: 'produtoId',
+  createdAt: 'createdAt'
+} as const
+
+export type PedidoItemScalarFieldEnum = (typeof PedidoItemScalarFieldEnum)[keyof typeof PedidoItemScalarFieldEnum]
 
 
 export const SortOrder = {

@@ -28,6 +28,7 @@ export type CardapioMinAggregateOutputType = {
   id: string | null
   nome: string | null
   descricao: string | null
+  imagemUrl: string | null
   ativo: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -37,6 +38,7 @@ export type CardapioMaxAggregateOutputType = {
   id: string | null
   nome: string | null
   descricao: string | null
+  imagemUrl: string | null
   ativo: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -46,6 +48,7 @@ export type CardapioCountAggregateOutputType = {
   id: number
   nome: number
   descricao: number
+  imagemUrl: number
   ativo: number
   createdAt: number
   updatedAt: number
@@ -57,6 +60,7 @@ export type CardapioMinAggregateInputType = {
   id?: true
   nome?: true
   descricao?: true
+  imagemUrl?: true
   ativo?: true
   createdAt?: true
   updatedAt?: true
@@ -66,6 +70,7 @@ export type CardapioMaxAggregateInputType = {
   id?: true
   nome?: true
   descricao?: true
+  imagemUrl?: true
   ativo?: true
   createdAt?: true
   updatedAt?: true
@@ -75,6 +80,7 @@ export type CardapioCountAggregateInputType = {
   id?: true
   nome?: true
   descricao?: true
+  imagemUrl?: true
   ativo?: true
   createdAt?: true
   updatedAt?: true
@@ -157,6 +163,7 @@ export type CardapioGroupByOutputType = {
   id: string
   nome: string
   descricao: string | null
+  imagemUrl: string | null
   ativo: boolean
   createdAt: Date
   updatedAt: Date
@@ -187,20 +194,24 @@ export type CardapioWhereInput = {
   id?: Prisma.StringFilter<"Cardapio"> | string
   nome?: Prisma.StringFilter<"Cardapio"> | string
   descricao?: Prisma.StringNullableFilter<"Cardapio"> | string | null
+  imagemUrl?: Prisma.StringNullableFilter<"Cardapio"> | string | null
   ativo?: Prisma.BoolFilter<"Cardapio"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Cardapio"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Cardapio"> | Date | string
   categorias?: Prisma.CategoriaListRelationFilter
+  pedidos?: Prisma.PedidoListRelationFilter
 }
 
 export type CardapioOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   nome?: Prisma.SortOrder
   descricao?: Prisma.SortOrderInput | Prisma.SortOrder
+  imagemUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   ativo?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   categorias?: Prisma.CategoriaOrderByRelationAggregateInput
+  pedidos?: Prisma.PedidoOrderByRelationAggregateInput
 }
 
 export type CardapioWhereUniqueInput = Prisma.AtLeast<{
@@ -210,16 +221,19 @@ export type CardapioWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.CardapioWhereInput | Prisma.CardapioWhereInput[]
   nome?: Prisma.StringFilter<"Cardapio"> | string
   descricao?: Prisma.StringNullableFilter<"Cardapio"> | string | null
+  imagemUrl?: Prisma.StringNullableFilter<"Cardapio"> | string | null
   ativo?: Prisma.BoolFilter<"Cardapio"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Cardapio"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Cardapio"> | Date | string
   categorias?: Prisma.CategoriaListRelationFilter
+  pedidos?: Prisma.PedidoListRelationFilter
 }, "id">
 
 export type CardapioOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   nome?: Prisma.SortOrder
   descricao?: Prisma.SortOrderInput | Prisma.SortOrder
+  imagemUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   ativo?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -235,6 +249,7 @@ export type CardapioScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"Cardapio"> | string
   nome?: Prisma.StringWithAggregatesFilter<"Cardapio"> | string
   descricao?: Prisma.StringNullableWithAggregatesFilter<"Cardapio"> | string | null
+  imagemUrl?: Prisma.StringNullableWithAggregatesFilter<"Cardapio"> | string | null
   ativo?: Prisma.BoolWithAggregatesFilter<"Cardapio"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Cardapio"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Cardapio"> | Date | string
@@ -244,46 +259,55 @@ export type CardapioCreateInput = {
   id?: string
   nome: string
   descricao?: string | null
+  imagemUrl?: string | null
   ativo?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   categorias?: Prisma.CategoriaCreateNestedManyWithoutCardapioInput
+  pedidos?: Prisma.PedidoCreateNestedManyWithoutCardapioInput
 }
 
 export type CardapioUncheckedCreateInput = {
   id?: string
   nome: string
   descricao?: string | null
+  imagemUrl?: string | null
   ativo?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   categorias?: Prisma.CategoriaUncheckedCreateNestedManyWithoutCardapioInput
+  pedidos?: Prisma.PedidoUncheckedCreateNestedManyWithoutCardapioInput
 }
 
 export type CardapioUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imagemUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   categorias?: Prisma.CategoriaUpdateManyWithoutCardapioNestedInput
+  pedidos?: Prisma.PedidoUpdateManyWithoutCardapioNestedInput
 }
 
 export type CardapioUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imagemUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   categorias?: Prisma.CategoriaUncheckedUpdateManyWithoutCardapioNestedInput
+  pedidos?: Prisma.PedidoUncheckedUpdateManyWithoutCardapioNestedInput
 }
 
 export type CardapioCreateManyInput = {
   id?: string
   nome: string
   descricao?: string | null
+  imagemUrl?: string | null
   ativo?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -293,6 +317,7 @@ export type CardapioUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imagemUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -302,6 +327,7 @@ export type CardapioUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imagemUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -311,6 +337,7 @@ export type CardapioCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   nome?: Prisma.SortOrder
   descricao?: Prisma.SortOrder
+  imagemUrl?: Prisma.SortOrder
   ativo?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -320,6 +347,7 @@ export type CardapioMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   nome?: Prisma.SortOrder
   descricao?: Prisma.SortOrder
+  imagemUrl?: Prisma.SortOrder
   ativo?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -329,6 +357,7 @@ export type CardapioMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   nome?: Prisma.SortOrder
   descricao?: Prisma.SortOrder
+  imagemUrl?: Prisma.SortOrder
   ativo?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -369,22 +398,40 @@ export type CardapioUpdateOneRequiredWithoutCategoriasNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.CardapioUpdateToOneWithWhereWithoutCategoriasInput, Prisma.CardapioUpdateWithoutCategoriasInput>, Prisma.CardapioUncheckedUpdateWithoutCategoriasInput>
 }
 
+export type CardapioCreateNestedOneWithoutPedidosInput = {
+  create?: Prisma.XOR<Prisma.CardapioCreateWithoutPedidosInput, Prisma.CardapioUncheckedCreateWithoutPedidosInput>
+  connectOrCreate?: Prisma.CardapioCreateOrConnectWithoutPedidosInput
+  connect?: Prisma.CardapioWhereUniqueInput
+}
+
+export type CardapioUpdateOneRequiredWithoutPedidosNestedInput = {
+  create?: Prisma.XOR<Prisma.CardapioCreateWithoutPedidosInput, Prisma.CardapioUncheckedCreateWithoutPedidosInput>
+  connectOrCreate?: Prisma.CardapioCreateOrConnectWithoutPedidosInput
+  upsert?: Prisma.CardapioUpsertWithoutPedidosInput
+  connect?: Prisma.CardapioWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CardapioUpdateToOneWithWhereWithoutPedidosInput, Prisma.CardapioUpdateWithoutPedidosInput>, Prisma.CardapioUncheckedUpdateWithoutPedidosInput>
+}
+
 export type CardapioCreateWithoutCategoriasInput = {
   id?: string
   nome: string
   descricao?: string | null
+  imagemUrl?: string | null
   ativo?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  pedidos?: Prisma.PedidoCreateNestedManyWithoutCardapioInput
 }
 
 export type CardapioUncheckedCreateWithoutCategoriasInput = {
   id?: string
   nome: string
   descricao?: string | null
+  imagemUrl?: string | null
   ativo?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  pedidos?: Prisma.PedidoUncheckedCreateNestedManyWithoutCardapioInput
 }
 
 export type CardapioCreateOrConnectWithoutCategoriasInput = {
@@ -407,18 +454,82 @@ export type CardapioUpdateWithoutCategoriasInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imagemUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  pedidos?: Prisma.PedidoUpdateManyWithoutCardapioNestedInput
 }
 
 export type CardapioUncheckedUpdateWithoutCategoriasInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imagemUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  pedidos?: Prisma.PedidoUncheckedUpdateManyWithoutCardapioNestedInput
+}
+
+export type CardapioCreateWithoutPedidosInput = {
+  id?: string
+  nome: string
+  descricao?: string | null
+  imagemUrl?: string | null
+  ativo?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  categorias?: Prisma.CategoriaCreateNestedManyWithoutCardapioInput
+}
+
+export type CardapioUncheckedCreateWithoutPedidosInput = {
+  id?: string
+  nome: string
+  descricao?: string | null
+  imagemUrl?: string | null
+  ativo?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  categorias?: Prisma.CategoriaUncheckedCreateNestedManyWithoutCardapioInput
+}
+
+export type CardapioCreateOrConnectWithoutPedidosInput = {
+  where: Prisma.CardapioWhereUniqueInput
+  create: Prisma.XOR<Prisma.CardapioCreateWithoutPedidosInput, Prisma.CardapioUncheckedCreateWithoutPedidosInput>
+}
+
+export type CardapioUpsertWithoutPedidosInput = {
+  update: Prisma.XOR<Prisma.CardapioUpdateWithoutPedidosInput, Prisma.CardapioUncheckedUpdateWithoutPedidosInput>
+  create: Prisma.XOR<Prisma.CardapioCreateWithoutPedidosInput, Prisma.CardapioUncheckedCreateWithoutPedidosInput>
+  where?: Prisma.CardapioWhereInput
+}
+
+export type CardapioUpdateToOneWithWhereWithoutPedidosInput = {
+  where?: Prisma.CardapioWhereInput
+  data: Prisma.XOR<Prisma.CardapioUpdateWithoutPedidosInput, Prisma.CardapioUncheckedUpdateWithoutPedidosInput>
+}
+
+export type CardapioUpdateWithoutPedidosInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imagemUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  categorias?: Prisma.CategoriaUpdateManyWithoutCardapioNestedInput
+}
+
+export type CardapioUncheckedUpdateWithoutPedidosInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imagemUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  categorias?: Prisma.CategoriaUncheckedUpdateManyWithoutCardapioNestedInput
 }
 
 
@@ -428,10 +539,12 @@ export type CardapioUncheckedUpdateWithoutCategoriasInput = {
 
 export type CardapioCountOutputType = {
   categorias: number
+  pedidos: number
 }
 
 export type CardapioCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   categorias?: boolean | CardapioCountOutputTypeCountCategoriasArgs
+  pedidos?: boolean | CardapioCountOutputTypeCountPedidosArgs
 }
 
 /**
@@ -451,15 +564,24 @@ export type CardapioCountOutputTypeCountCategoriasArgs<ExtArgs extends runtime.T
   where?: Prisma.CategoriaWhereInput
 }
 
+/**
+ * CardapioCountOutputType without action
+ */
+export type CardapioCountOutputTypeCountPedidosArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PedidoWhereInput
+}
+
 
 export type CardapioSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   nome?: boolean
   descricao?: boolean
+  imagemUrl?: boolean
   ativo?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   categorias?: boolean | Prisma.Cardapio$categoriasArgs<ExtArgs>
+  pedidos?: boolean | Prisma.Cardapio$pedidosArgs<ExtArgs>
   _count?: boolean | Prisma.CardapioCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["cardapio"]>
 
@@ -467,6 +589,7 @@ export type CardapioSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   id?: boolean
   nome?: boolean
   descricao?: boolean
+  imagemUrl?: boolean
   ativo?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -476,6 +599,7 @@ export type CardapioSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   id?: boolean
   nome?: boolean
   descricao?: boolean
+  imagemUrl?: boolean
   ativo?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -485,14 +609,16 @@ export type CardapioSelectScalar = {
   id?: boolean
   nome?: boolean
   descricao?: boolean
+  imagemUrl?: boolean
   ativo?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type CardapioOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nome" | "descricao" | "ativo" | "createdAt" | "updatedAt", ExtArgs["result"]["cardapio"]>
+export type CardapioOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nome" | "descricao" | "imagemUrl" | "ativo" | "createdAt" | "updatedAt", ExtArgs["result"]["cardapio"]>
 export type CardapioInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   categorias?: boolean | Prisma.Cardapio$categoriasArgs<ExtArgs>
+  pedidos?: boolean | Prisma.Cardapio$pedidosArgs<ExtArgs>
   _count?: boolean | Prisma.CardapioCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type CardapioIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -502,11 +628,13 @@ export type $CardapioPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
   name: "Cardapio"
   objects: {
     categorias: Prisma.$CategoriaPayload<ExtArgs>[]
+    pedidos: Prisma.$PedidoPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     nome: string
     descricao: string | null
+    imagemUrl: string | null
     ativo: boolean
     createdAt: Date
     updatedAt: Date
@@ -905,6 +1033,7 @@ readonly fields: CardapioFieldRefs;
 export interface Prisma__CardapioClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   categorias<T extends Prisma.Cardapio$categoriasArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Cardapio$categoriasArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CategoriaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  pedidos<T extends Prisma.Cardapio$pedidosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Cardapio$pedidosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PedidoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -937,6 +1066,7 @@ export interface CardapioFieldRefs {
   readonly id: Prisma.FieldRef<"Cardapio", 'String'>
   readonly nome: Prisma.FieldRef<"Cardapio", 'String'>
   readonly descricao: Prisma.FieldRef<"Cardapio", 'String'>
+  readonly imagemUrl: Prisma.FieldRef<"Cardapio", 'String'>
   readonly ativo: Prisma.FieldRef<"Cardapio", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"Cardapio", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Cardapio", 'DateTime'>
@@ -1354,6 +1484,30 @@ export type Cardapio$categoriasArgs<ExtArgs extends runtime.Types.Extensions.Int
   take?: number
   skip?: number
   distinct?: Prisma.CategoriaScalarFieldEnum | Prisma.CategoriaScalarFieldEnum[]
+}
+
+/**
+ * Cardapio.pedidos
+ */
+export type Cardapio$pedidosArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Pedido
+   */
+  select?: Prisma.PedidoSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Pedido
+   */
+  omit?: Prisma.PedidoOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PedidoInclude<ExtArgs> | null
+  where?: Prisma.PedidoWhereInput
+  orderBy?: Prisma.PedidoOrderByWithRelationInput | Prisma.PedidoOrderByWithRelationInput[]
+  cursor?: Prisma.PedidoWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PedidoScalarFieldEnum | Prisma.PedidoScalarFieldEnum[]
 }
 
 /**

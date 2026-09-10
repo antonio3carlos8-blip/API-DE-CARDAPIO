@@ -11,8 +11,9 @@ class CardapioRepositorio extends BaseRepository {
       where: { id },
       include: {
         categorias: {
+          orderBy: { nome: "asc" },
           include: {
-            produtos: true,
+            produtos: { orderBy: { nome: "asc" } },
           },
         },
       },

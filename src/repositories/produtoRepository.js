@@ -6,10 +6,14 @@ class ProdutoRepository extends BaseRepository {
     super(prisma.produto);
   }
 
-  async listarComCategoria(filtros = {}) {
-    const { categoriaId, disponivel, busca } = filtros;
+  async listarComCategoria(filtros = {}, incluirInativos = false) {
+    const { categoriaId, disponivel, busca, skip, take } = filtros;
 
     const where = {};
+
+    if (!incluirInativos) {
+      where.categoria = { cardapio: { ativo: true } };
+    }
 
     if (categoriaId) {
       where.categoriaId = categoriaId;
@@ -26,9 +30,11 @@ class ProdutoRepository extends BaseRepository {
     return this.modelo.findMany({
       where,
       include: {
-        categoria: true,
+        categoria: { include: { cardapio: true } },
       },
       orderBy: { nome: "asc" },
+      skip,
+      take,
     });
   }
 
@@ -36,7 +42,7 @@ class ProdutoRepository extends BaseRepository {
     return this.modelo.findUnique({
       where: { id },
       include: {
-        categoria: true,
+        categoria: { include: { cardapio: true } },
       },
     });
   }

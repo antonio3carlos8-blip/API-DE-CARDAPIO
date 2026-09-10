@@ -7,12 +7,17 @@ class CardapioController {
   }
 
   async listar(req, res) {
-    const cardapios = await cardapioServices.listar();
+    const cardapios = await cardapioServices.listar(
+      req.filtros,
+      Boolean(req.autenticacao)
+    );
     res.json(cardapios);
   }
 
   async buscarPorId(req, res) {
-    const cardapio = await cardapioServices.buscarPorId(req.params.id);
+    const cardapio = await cardapioServices.buscarPorId(req.params.id, {
+      incluirInativos: Boolean(req.autenticacao),
+    });
     res.json(cardapio);
   }
 

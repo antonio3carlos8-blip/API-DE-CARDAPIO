@@ -19,13 +19,32 @@ export const tratadorDeErros = (erro, req, res, next) => {
     return res.status(erro.status).json({ erro: erro.message });
   }
 
+  if (erro?.type === "entity.parse.failed") {
+    return res.status(400).json({ erro: "JSON inválido" });
+  }
+
+  if (erro?.type === "entity.too.large") {
+    return res.status(413).json({ erro: "Corpo da requisição muito grande" });
+  }
+
   const erroPrisma = MENSAGENS_PRISMA[erro?.code];
 
   if (erroPrisma) {
     return res.status(erroPrisma.status).json({ erro: erroPrisma.mensagem });
   }
 
-  console.error(erro);
+  if (
+    erro?.code === "P1001" ||
+    erro?.code === "P1002" ||
+    erro?.code === "ECONNREFUSED" ||
+    erro?.cause?.code === "ECONNREFUSED"
+  ) {
+    return res.status(503).json({ erro: "Serviço de dados indisponível" });
+  }
+
+  if (process.env.NODE_ENV !== "test") {
+    console.error(erro);
+  }
 
   return res.status(500).json({ erro: "Erro interno do servidor" });
 };

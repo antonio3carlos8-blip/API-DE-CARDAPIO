@@ -7,12 +7,17 @@ class CategoriaController {
   }
 
   async listar(req, res) {
-    const categorias = await categoriaServices.listar(req.filtros);
+    const categorias = await categoriaServices.listar(
+      req.filtros,
+      Boolean(req.autenticacao)
+    );
     res.json(categorias);
   }
 
   async buscarPorId(req, res) {
-    const categoria = await categoriaServices.buscarPorId(req.params.id);
+    const categoria = await categoriaServices.buscarPorId(req.params.id, {
+      incluirInativos: Boolean(req.autenticacao),
+    });
     res.json(categoria);
   }
 

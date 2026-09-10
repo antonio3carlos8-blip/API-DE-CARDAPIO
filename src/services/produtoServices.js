@@ -1,9 +1,17 @@
 import produtoRepository from "../repositories/produtoRepository.js";
 import categoriaServices from "./categoriaServices.js";
 import AppError from "../utils/AppError.js";
+import { obterPaginacao } from "../validators/comumValidator.js";
 
-const formatar = (produto) =>
-  produto && { ...produto, preco: Number(produto.preco) };
+const formatar = (produto) => {
+  if (!produto) return produto;
+  const categoria = produto.categoria
+    ? Object.fromEntries(
+        Object.entries(produto.categoria).filter(([chave]) => chave !== "cardapio")
+      )
+    : produto.categoria;
+  return { ...produto, categoria, preco: Number(produto.preco) };
+};
 
 class ProdutoServices {
   async criar(dados) {
@@ -11,15 +19,18 @@ class ProdutoServices {
     return formatar(await produtoRepository.criar(dados));
   }
 
-  async listar(filtros = {}) {
-    const produtos = await produtoRepository.listarComCategoria(filtros);
+  async listar(filtros = {}, incluirInativos = false) {
+    const produtos = await produtoRepository.listarComCategoria({
+      ...filtros,
+      ...obterPaginacao(filtros),
+    }, incluirInativos);
     return produtos.map(formatar);
   }
 
-  async buscarPorId(id) {
+  async buscarPorId(id, { incluirInativos = false } = {}) {
     const produto = await produtoRepository.buscarComCategoria(id);
 
-    if (!produto) {
+    if (!produto || (!incluirInativos && produto.categoria?.cardapio?.ativo === false)) {
       throw new AppError("Produto não encontrado", 404);
     }
 

@@ -11,4 +11,6 @@
 export type * from './models/Cardapio.ts'
 export type * from './models/Categoria.ts'
 export type * from './models/Produto.ts'
+export type * from './models/Pedido.ts'
+export type * from './models/PedidoItem.ts'
 export type * from './commonInputTypes.ts'

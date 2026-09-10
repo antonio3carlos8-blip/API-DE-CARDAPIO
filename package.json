@@ -5,11 +5,18 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "postinstall": "prisma skills sync || exit 0",
-    "dev": "nodemon src/server.js",
-    "start": "node src/server.js",
+    "test": "cross-env NODE_ENV=test DATA_STORE=memory node --test --test-concurrency=1 tests/**/*.test.js",
+    "test:coverage": "cross-env NODE_ENV=test DATA_STORE=memory node --experimental-test-coverage --test-concurrency=1 --test-coverage-include=src/**/*.js --test-coverage-exclude=src/server.js --test-coverage-exclude=src/seeds/** --test-coverage-lines=80 --test-coverage-branches=70 --test-coverage-functions=70 --test tests/**/*.test.js",
+    "postinstall": "cross-env PRISMA_SCHEMA_ONLY=true prisma generate",
+    "prisma:format": "cross-env PRISMA_SCHEMA_ONLY=true prisma format",
+    "prisma:generate": "cross-env PRISMA_SCHEMA_ONLY=true prisma generate",
+    "dev": "cross-env NODE_ENV=development DATA_STORE=memory nodemon src/server.js",
+    "dev:postgres": "cross-env NODE_ENV=development DATA_STORE=postgres nodemon src/server.js",
+    "start": "cross-env NODE_ENV=production DATA_STORE=postgres node src/server.js",
     "seed": "node src/seeds/seed.js"
+  },
+  "engines": {
+    "node": ">=24"
   },
   "repository": {
     "type": "git",
@@ -28,12 +35,21 @@
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
+    "express-rate-limit": "^8.7.0",
+    "helmet": "^8.3.0",
+    "jose": "^6.2.12",
     "pg": "^8.23.0",
-    "zod": "^4.5.2"
+    "zod": "^4.6.1"
   },
   "devDependencies": {
     "@types/pg": "^8.23.1",
+    "cross-env": "^10.1.0",
     "nodemon": "^3.1.14",
-    "prisma": "^7.10.0"
+    "prisma": "^7.10.0",
+    "supertest": "^7.2.2"
+  },
+  "overrides": {
+    "deepmerge-ts": "8.0.2",
+    "mysql2": "3.24.4"
   }
 }

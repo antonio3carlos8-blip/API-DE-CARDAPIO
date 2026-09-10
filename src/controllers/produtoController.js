@@ -7,12 +7,17 @@ class ProdutoController {
   }
 
   async listar(req, res) {
-    const produtos = await produtoServices.listar(req.filtros);
+    const produtos = await produtoServices.listar(
+      req.filtros,
+      Boolean(req.autenticacao)
+    );
     res.json(produtos);
   }
 
   async buscarPorId(req, res) {
-    const produto = await produtoServices.buscarPorId(req.params.id);
+    const produto = await produtoServices.buscarPorId(req.params.id, {
+      incluirInativos: Boolean(req.autenticacao),
+    });
     res.json(produto);
   }
 

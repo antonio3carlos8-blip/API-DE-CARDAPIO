@@ -1,11 +1,16 @@
 import "dotenv/config";
 import app from "./app.js";
 import prisma from "./config/prisma.js";
+import { obterConfiguracaoAdmin, obterHost } from "./config/runtime.js";
 
-const PORTA = process.env.PORT || 3000;
+const PORTA = process.env.PORT || 3001;
+const HOST = obterHost();
 
-const servidor = app.listen(PORTA, () => {
-  console.log(`Servidor rodando em http://localhost:${PORTA}`);
+obterConfiguracaoAdmin();
+await prisma.$connect();
+
+const servidor = app.listen(PORTA, HOST, () => {
+  console.log(`Servidor rodando em http://${HOST}:${PORTA}`);
 });
 
 const encerrar = async (sinal) => {

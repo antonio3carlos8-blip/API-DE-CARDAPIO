@@ -6,10 +6,11 @@ class CategoriaRepository extends BaseRepository {
     super(prisma.categoria);
   }
 
-  async listarPorCardapio(cardapioId) {
+  async listarPorCardapio(cardapioId, paginacao = {}) {
     return this.modelo.findMany({
       where: { cardapioId },
       orderBy: { nome: "asc" },
+      ...paginacao,
     });
   }
 
@@ -17,7 +18,8 @@ class CategoriaRepository extends BaseRepository {
     return this.modelo.findUnique({
       where: { id },
       include: {
-        produtos: true,
+        produtos: { orderBy: { nome: "asc" } },
+        cardapio: true,
       },
     });
   }
